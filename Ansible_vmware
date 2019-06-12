@@ -1,0 +1,20 @@
+asnibe_vmware deploy vm from template 
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  
+  tasks:
+  - name: Create a VM from a template
+    vmware_guest:
+      hostname: vcenter
+      username: vcenter_username
+      password: vcenter_password
+      validate_certs: no
+      name: test_ansible_01 
+      state: poweredon
+      template: template_name
+      datacenter: data_center_name
+      esxi_hostname: host_name(your esxi hosst) 
+    delegate_to: localhost
+    register: deploy
